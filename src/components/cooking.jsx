@@ -1,12 +1,5 @@
-// src/sections/Cooking.jsx
 import { FaUtensils } from "react-icons/fa";
 
-/**
- * Cooking section styled to match portfolio hero aesthetic
- * - Orange gradient background
- * - Big centered header with icon
- * - Responsive card-style photo gallery
- */
 export default function Cooking({ photos = defaultPhotos }) {
   return (
     <section id="cooking" className="cooking-section">
@@ -14,7 +7,7 @@ export default function Cooking({ photos = defaultPhotos }) {
         <FaUtensils className="cooking-icon" />
         <h2 className="cooking-title">Cooking Creations</h2>
         <p className="cooking-sub">
-          From sweet treats to savory plates — here are some dishes I’ve made 🍊
+          From sweet treats to savory plates — here are some dishes I’ve made 
         </p>
       </div>
 
@@ -87,8 +80,8 @@ export default function Cooking({ photos = defaultPhotos }) {
 }
 
 const defaultPhotos = [
-  { src: "/images/cooking/pasta.jpg", caption: "Creamy Tomato Basil Pasta" },
-  { src: "/images/cooking/tacos.jpg", caption: "Street-Style Tacos" },
-  { src: "/images/cooking/cake.jpg", caption: "Berry Layer Cake" },
-  { src: "/images/cooking/ramen.jpg", caption: "Miso Ramen" },
+  { src: "/white_carrot.jpeg", caption: "Yellow Pepper Brick " },
+  { src: "/pasta.jpeg", caption: "Fresh Truffle Pasta" },
+  { src: "/carrot.jpeg", caption: "Red Velvet Cake" },
+  { src: "/cucumber.jpeg", caption: "Stuffed Zucchini " },
 ];

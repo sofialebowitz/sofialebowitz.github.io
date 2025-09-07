@@ -57,28 +57,20 @@ export default function AboutMe(props) {
           padding: '30px',
           boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)'
         }}>
-          <Typography sx={{ 
+          <Typography sx={{  
             fontFamily: "'Inter', sans-serif",
             fontSize: '16px',
             lineHeight: '1.7',
             color: '#2c3e50',
             fontWeight: '400'
           }}>
-            <Box component="p" sx={{ marginBottom: '12px', fontSize: '15px', fontWeight: '500' }}>
-              Hello, I am Sofia Lebowitz. I'm from McLean, Virginia and I'm currently studying Communications in the college of Arts, Media and Design at Northeastern University.
-            </Box>
-            
-            <Box component="p" sx={{ marginBottom: '12px' }}>
-              I have a passion for the food industry and this summer I had the opportunity to go to Italy to work in a high end, farm to table restaurant, Organika, for Chef Francesco Bucalleti.
-            </Box>
-            
-            <Box component="p" sx={{ marginBottom: '12px' }}>
-              For the last two years I have worked as a manager for Artisan Confections, where I get to make chocolates and gelato!
-            </Box>
-            
-            <Box component="p" sx={{ marginBottom: 0, fontStyle: 'italic', color: '#34495e' }}>
-              Aside from my food industry experience I love to travel, read and spend time with friends and family. Thanks for stopping by!
-            </Box>
+            Hello, I am Sofia Lebowitz. I’m from McLean, Virginia and I'm currently studying Communications in the college of Arts, Media and Design at Northeastern University. 
+
+I have a passion for the food industry and this summer I had the opportunity to go to Italy to work in a high end, farm to table restaurant, Organika, for Chef Francesco Bucalleti. 
+
+For the last two years I have worked as a manager for Artisan Confections, where I get to make chocolates and gelato!
+
+Aside from my food industry experience I love to travel, read and spend time with friends and family. Thanks for stopping by!
           </Typography>
         </Box>
         

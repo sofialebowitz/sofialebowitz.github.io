@@ -3,13 +3,13 @@ import AboutMe from "./components/aboutme";
 import Landing from "./components/landing";
 import Connect from "./components/connect";
 import Cooking from "./components/cooking";
+import TravelSection from "./components/travel";
 
 export default function Home() {
   return (
-    <div style={{backgroundColor:"linear-gradient(135deg, #e0e7ff, #fdf2f8)"}}>
+    <div style={{ background: "linear-gradient(135deg, #e0e7ff, #fdf2f8)" }}>
       <Navbar />
 
-      {/* Sections with IDs that match Navbar keys */}
       <section id="home">
         <Landing />
       </section>
@@ -23,8 +23,7 @@ export default function Home() {
       </section>
 
       <section id="travel" style={styles.placeholder}>
-        <h2>Travel</h2>
-        <p>Content coming soon...</p>
+        <TravelSection />
       </section>
 
       <section id="contact">
@@ -42,7 +41,7 @@ const styles = {
     fontFamily: "sans-serif",
   },
   placeholder: {
-    minHeight: "100vh", // so scrolling is visible
+    minHeight: "100vh",
     padding: "80px 40px",
     fontFamily: "sans-serif",
   },
