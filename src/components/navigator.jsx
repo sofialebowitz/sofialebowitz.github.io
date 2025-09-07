@@ -1,8 +1,5 @@
-// src/components/Navbar.jsx
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import {
-  FaHome, FaUser, FaUtensils, FaPlane, FaEnvelope, FaBars, FaTimes,
-} from "react-icons/fa";
+import { FaHome, FaUser, FaUtensils, FaPlane, FaEnvelope, FaBars, FaTimes } from "react-icons/fa";
 
 const NAV_ITEMS = [
   { key: "home", label: "Home", icon: <FaHome /> },
@@ -12,13 +9,16 @@ const NAV_ITEMS = [
   { key: "contact", label: "Contact", icon: <FaEnvelope /> },
 ];
 
-export default function Navbar() {
+export default function Navigator() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeKey, setActiveKey] = useState("home");
 
+  const navRef = useRef(null);
   const linksRef = useRef(null);
   const itemRefs = useRef({});
   const [indicator, setIndicator] = useState({ left: 0, width: 0, height: 0, ready: false });
+
+  const navHeight = () => navRef.current?.getBoundingClientRect().height || 0;
 
   const updateIndicator = () => {
     const container = linksRef.current;
@@ -34,23 +34,25 @@ export default function Navbar() {
     });
   };
 
-  // paint indicator as early as possible
   useLayoutEffect(() => {
-    updateIndicator();
-    // observe size changes (fonts, window resize, etc.)
+    const raf = requestAnimationFrame(updateIndicator);
     const ro = new ResizeObserver(updateIndicator);
     if (linksRef.current) ro.observe(linksRef.current);
     window.addEventListener("resize", updateIndicator);
     return () => {
+      cancelAnimationFrame(raf);
       ro.disconnect();
       window.removeEventListener("resize", updateIndicator);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // move indicator whenever activeKey changes
   useEffect(() => {
     updateIndicator();
+    // close on ESC
+    const onKey = (e) => e.key === "Escape" && setMenuOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeKey]);
 
@@ -58,34 +60,40 @@ export default function Navbar() {
     setActiveKey(key);
     setMenuOpen(false);
     const el = document.getElementById(key);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (!el) return;
+    const offset = navHeight() + 8;
+    const top = window.scrollY + el.getBoundingClientRect().top - offset;
+    window.scrollTo({ top, behavior: "smooth" });
   };
 
-  // --- SCROLLSPY: updates activeKey while scrolling ---
   useEffect(() => {
     const sections = NAV_ITEMS.map((n) => document.getElementById(n.key)).filter(Boolean);
-    if (sections.length === 0) return;
+    if (!sections.length) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // choose the section with greatest visibility
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible?.target?.id && visible.target.id !== activeKey) {
-          setActiveKey(visible.target.id);
-        }
-      },
-      {
-        root: null,
-        // bias toward center of viewport for stability
-        rootMargin: "-35% 0px -45% 0px",
-        threshold: [0.25, 0.5, 0.75],
-      }
-    );
+    let observer;
+    const buildObserver = () => {
+      const topOffset = navHeight() + 8;
+      if (observer) observer.disconnect();
+      observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((e) => e.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (visible?.target?.id && visible.target.id !== activeKey) {
+            setActiveKey(visible.target.id);
+          }
+        },
+        { root: null, rootMargin: `-${topOffset}px 0px -55% 0px`, threshold: [0.2, 0.5, 0.8] }
+      );
+      sections.forEach((s) => observer.observe(s));
+    };
 
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
+    buildObserver();
+    window.addEventListener("resize", buildObserver);
+    return () => {
+      window.removeEventListener("resize", buildObserver);
+      observer?.disconnect();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -94,9 +102,7 @@ export default function Navbar() {
     return (
       <li
         key={key}
-        ref={(el) => {
-          if (!isMobile) itemRefs.current[key] = el;
-        }}
+        ref={(el) => { if (!isMobile) itemRefs.current[key] = el; }}
         style={{
           ...styles.link,
           ...(isMobile && active ? styles.activePill : {}),
@@ -110,11 +116,26 @@ export default function Navbar() {
   };
 
   return (
-    <nav style={styles.navbar}>
+    <nav ref={navRef} style={styles.navbar}>
+      {/* Responsive CSS just for the nav */}
+      <style>{`
+        /* Show hamburger, hide desktop links on small screens */
+        @media (max-width: 900px) {
+          .nav-links { display: none !important; }
+          .nav-hamburger { display: inline-flex !important; }
+          .mobile-menu { display: block; }
+        }
+        /* Hide mobile menu container on desktop */
+        @media (min-width: 901px) {
+          .mobile-menu { display: none !important; }
+        }
+      `}</style>
+
       <div style={styles.logo}>
         <span style={styles.logoText}>Sofia Lebowitz</span>
       </div>
 
+      {/* Desktop links */}
       <ul style={styles.links} className="nav-links" ref={linksRef}>
         <div
           style={{
@@ -128,19 +149,26 @@ export default function Navbar() {
         {NAV_ITEMS.map((it) => renderLink(it))}
       </ul>
 
+      {/* Hamburger (hidden by default, shown via media query) */}
       <button
         className="nav-hamburger"
         style={styles.hamburger}
-        onClick={() => setMenuOpen(!menuOpen)}
+        onClick={() => setMenuOpen((v) => !v)}
         aria-label={menuOpen ? "Close menu" : "Open menu"}
+        aria-expanded={menuOpen}
+        aria-controls="mobile-menu"
       >
         {menuOpen ? <FaTimes /> : <FaBars />}
       </button>
 
+      {/* Mobile menu */}
       <div
+        id="mobile-menu"
+        className="mobile-menu"
         style={{
           ...styles.mobileMenu,
-          maxHeight: menuOpen ? "300px" : "0px",
+          top: `${navHeight() || 60}px`,
+          maxHeight: menuOpen ? "320px" : "0px",
           opacity: menuOpen ? 1 : 0,
         }}
       >
@@ -205,7 +233,7 @@ const styles = {
     boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
     transition: "transform .26s cubic-bezier(.22,.61,.36,1), width .26s, height .26s, opacity .2s",
     zIndex: 0,
-    pointerEvents: "none", // don't block clicks
+    pointerEvents: "none",
   },
   activePill: {
     background: "linear-gradient(to right, #00bfff, #8a2be2)",
@@ -213,19 +241,21 @@ const styles = {
     boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
   },
   hamburger: {
-    display: "none",
+    display: "none",            // shown on small screens via CSS <style> above
     fontSize: "22px",
     background: "none",
     border: "none",
     cursor: "pointer",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 8,
   },
   mobileMenu: {
     overflow: "hidden",
-    transition: "all 0.3s ease",
+    transition: "all 0.28s ease",
     background: "#fff",
     borderTop: "1px solid #eee",
     position: "absolute",
-    top: "60px",
     left: 0,
     right: 0,
   },
@@ -239,20 +269,3 @@ const styles = {
     alignItems: "center",
   },
 };
-
-// Scoped CSS (inject once in the browser)
-const css = `
-@media (max-width: 768px) {
-  .nav-links { display: none !important; }
-  .nav-hamburger { display: block !important; }
-}
-html { scroll-behavior: smooth; }
-/* Ensure targets aren't hidden behind sticky header */
-section[id] { scroll-margin-top: 80px; }
-`;
-if (typeof document !== "undefined" && !document.getElementById("nav-css")) {
-  const style = document.createElement("style");
-  style.id = "nav-css";
-  style.textContent = css;
-  document.head.appendChild(style);
-}

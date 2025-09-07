@@ -82,6 +82,6 @@ export default function Cooking({ photos = defaultPhotos }) {
 const defaultPhotos = [
   { src: "/white_carrot.jpeg", caption: "Yellow Pepper Brick " },
   { src: "/pasta.jpeg", caption: "Fresh Truffle Pasta" },
-  { src: "/carrot.jpeg", caption: "Red Velvet Cake" },
+  { src: "/cake.jpeg", caption: "Red Velvet Cake" },
   { src: "/cucumber.jpeg", caption: "Stuffed Zucchini " },
 ];

@@ -121,14 +121,15 @@ const styles = {
     marginBottom: 12,
   },
   input: {
-    width: "100%",
+    width: "calc(100% - 20px)",
+    boxSizing: "border-box",
     marginBottom: 12,
     padding: "10px",
     borderRadius: 8,
     border: "1px solid #ccc",
   },
   textarea: {
-    width: "100%",
+    width: "calc(100% - 20px)",
     minHeight: 120,
     marginBottom: 12,
     padding: "10px",

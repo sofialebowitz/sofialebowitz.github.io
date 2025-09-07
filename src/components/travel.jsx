@@ -9,26 +9,26 @@ const travelDestinations = [
     gate: "A12"
   },
   {
-    destination: "Paris, France",
-    date: "Spring 2023",
-    purpose: "Cultural Exchange",
+    destination: "London, England",
+    date: "Spring 2024",
+    purpose: "Study Abroad",
+    flightCode: "JL2468",
+    gate: "D21"
+  },
+  {
+    destination: "Croatia",
+    date: "Summer 2016",
+    purpose: "Family Vacation",
     flightCode: "UA3567",
     gate: "B8"
   },
   {
-    destination: "Barcelona, Spain",
-    date: "Fall 2023",
-    purpose: "Study Abroad",
+    destination: "St. Lucia",
+    date: "Winter 2022",
+    purpose: "Family Vacation",
     flightCode: "DL8901",
     gate: "C15"
   },
-  {
-    destination: "Tokyo, Japan",
-    date: "Winter 2022",
-    purpose: "Adventure Travel",
-    flightCode: "JL2468",
-    gate: "D21"
-  }
 ];
 
 const PlaneTicket = ({ destination, date, purpose, flightCode, gate, index }) => {
