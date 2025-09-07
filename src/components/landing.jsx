@@ -85,7 +85,7 @@ const styles = {
     textAlign: "center",
     padding: "60px 10px",
     minHeight: "60vh",
-    background: "linear-gradient(135deg, #e0e7ff, #fdf2f8)",
+    // background: "linear-gradient(135deg, #e0e7ff, #fdf2f8)",
     fontFamily: "Delius",
     display: "flex",
     flexDirection: "column",

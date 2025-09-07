@@ -6,7 +6,7 @@ import Cooking from "./components/cooking";
 
 export default function Home() {
   return (
-    <div>
+    <div style={{backgroundColor:"linear-gradient(135deg, #e0e7ff, #fdf2f8)"}}>
       <Navbar />
 
       {/* Sections with IDs that match Navbar keys */}

@@ -7,47 +7,37 @@ export default function AboutMe(props) {
     <Box sx={{ 
       display: 'flex', 
       flexDirection: 'column', 
-      width: '100%',
+      maxWidth: '1300px',
+      height: 'auto',
       background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-      borderRadius: '16px',
-      boxShadow: "0 20px 40px rgba(102, 126, 234, 0.3)",
+      borderRadius: '24px',
+      boxShadow: "0 8px 32px rgba(102, 126, 234, 0.3)",
       overflow: 'hidden',
-      position: 'relative',
-      '&::before': {
-        content: '""',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'rgba(255, 255, 255, 0.1)',
-        backdropFilter: 'blur(10px)',
-        zIndex: 1
-      }
+      margin: '0 auto',
+      padding: '40px'
     }}>
       <Box 
         component="h1"
         sx={{
           textAlign: "center",
           width: '100%',
-          fontSize: "42px",
+          fontSize: "36px",
           fontWeight: "700",
-          margin: "32px 0 24px",
+          margin: "0 0 20px 0",
           color: "#ffffff",
           fontFamily: "'Poppins', sans-serif",
-          letterSpacing: "2px",
-          textShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+          letterSpacing: "3px",
+          textShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
           position: 'relative',
-          zIndex: 2,
           '&::after': {
             content: '""',
             position: 'absolute',
-            bottom: '-8px',
+            bottom: '-10px',
             left: '50%',
             transform: 'translateX(-50%)',
             width: '60px',
-            height: '4px',
-            background: 'linear-gradient(90deg, #ffd89b, #19547b)',
+            height: '3px',
+            background: '#ffd700',
             borderRadius: '2px'
           }
         }}
@@ -57,40 +47,32 @@ export default function AboutMe(props) {
       
       <Box sx={{ 
         display: 'flex', 
-        width: '100%', 
-        padding: '0 32px 32px',
-        position: 'relative',
-        zIndex: 2,
         alignItems: 'flex-start',
-        gap: '24px'
+        gap: '30px'
       }}>
         <Box sx={{ 
           flex: 1,
           background: 'rgba(255, 255, 255, 0.95)',
-          borderRadius: '12px',
-          padding: '24px',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-          backdropFilter: 'blur(10px)'
+          borderRadius: '16px',
+          padding: '30px',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)'
         }}>
           <Typography sx={{ 
             fontFamily: "'Inter', sans-serif",
             fontSize: '16px',
-            lineHeight: '1.8',
+            lineHeight: '1.7',
             color: '#2c3e50',
-            fontWeight: '400',
-            '& p': {
-              marginBottom: '16px'
-            }
+            fontWeight: '400'
           }}>
-            <Box component="p" sx={{ marginBottom: '16px', fontSize: '18px', fontWeight: '500' }}>
+            <Box component="p" sx={{ marginBottom: '12px', fontSize: '15px', fontWeight: '500' }}>
               Hello, I am Sofia Lebowitz. I'm from McLean, Virginia and I'm currently studying Communications in the college of Arts, Media and Design at Northeastern University.
             </Box>
             
-            <Box component="p" sx={{ marginBottom: '16px' }}>
+            <Box component="p" sx={{ marginBottom: '12px' }}>
               I have a passion for the food industry and this summer I had the opportunity to go to Italy to work in a high end, farm to table restaurant, Organika, for Chef Francesco Bucalleti.
             </Box>
             
-            <Box component="p" sx={{ marginBottom: '16px' }}>
+            <Box component="p" sx={{ marginBottom: '12px' }}>
               For the last two years I have worked as a manager for Artisan Confections, where I get to make chocolates and gelato!
             </Box>
             
@@ -102,7 +84,6 @@ export default function AboutMe(props) {
         
         <Box sx={{ 
           display: 'flex',
-          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center'
         }}>
@@ -110,22 +91,23 @@ export default function AboutMe(props) {
             href="https://www.linkedin.com/in/sofialebowitz" 
             target="_blank"
             sx={{
-              background: 'linear-gradient(45deg, #0077b5, #00a0dc)',
-              borderRadius: '50%',
-              minWidth: '80px',
-              minHeight: '80px',
+              background: '#0077b5',
+              borderRadius: '8px',
+              width: '60px',
+              height: '60px',
+              minWidth: '60px',
               padding: 0,
-              boxShadow: '0 8px 20px rgba(0, 119, 181, 0.4)',
+              boxShadow: '0 4px 12px rgba(0, 119, 181, 0.3)',
               transition: 'all 0.3s ease',
               '&:hover': {
-                transform: 'translateY(-4px)',
-                boxShadow: '0 12px 30px rgba(0, 119, 181, 0.6)',
-                background: 'linear-gradient(45deg, #005885, #0077b5)'
+                transform: 'translateY(-2px)',
+                boxShadow: '0 6px 20px rgba(0, 119, 181, 0.4)',
+                background: '#005885'
               }
             }}
           >
             <LinkedInIcon sx={{ 
-              fontSize: 48, 
+              fontSize: 32, 
               color: '#ffffff'
             }}/> 
           </Button>
