@@ -49,7 +49,7 @@ export default function Landing() {
       <div style={styles.profileWrapper} className="fade-in-all">
         <div style={styles.profileCircle}>
           <img
-            src="/sofiaheadshot.jpeg"
+            src='public/sofiaheadshot.png'
             alt="Sofia Headshot"
             style={styles.profileImage}
           />
@@ -86,7 +86,7 @@ const styles = {
     padding: "60px 10px",
     minHeight: "60vh",
     background: "linear-gradient(135deg, #e0e7ff, #fdf2f8)",
-    fontFamily: "sans-serif",
+    fontFamily: "Delius",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",

@@ -2,18 +2,36 @@ import Navbar from "./components/navigator";
 import AboutMe from "./components/aboutme";
 import Landing from "./components/landing";
 import Connect from "./components/connect";
+import Cooking from "./components/cooking";
 
 export default function Home() {
   return (
     <div>
       <Navbar />
-      <Landing />
 
-      <AboutMe /> 
+      {/* Sections with IDs that match Navbar keys */}
+      <section id="home">
+        <Landing />
+      </section>
 
-      <Connect />
-      <main style={styles.main}>
-      </main>
+      <section id="about">
+        <AboutMe />
+      </section>
+
+      <section id="cooking" style={styles.placeholder}>
+        <Cooking />
+      </section>
+
+      <section id="travel" style={styles.placeholder}>
+        <h2>Travel</h2>
+        <p>Content coming soon...</p>
+      </section>
+
+      <section id="contact">
+        <Connect />
+      </section>
+
+      <main style={styles.main}></main>
     </div>
   );
 }
@@ -21,6 +39,11 @@ export default function Home() {
 const styles = {
   main: {
     padding: "40px",
+    fontFamily: "sans-serif",
+  },
+  placeholder: {
+    minHeight: "100vh", // so scrolling is visible
+    padding: "80px 40px",
     fontFamily: "sans-serif",
   },
 };
