@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from "./components/navigator";
+import AboutMe from "./components/aboutme";
+import Landing from "./components/landing";
+import Connect from "./components/connect";
 
-function App() {
+export default function Home() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar />
+      <Landing />
+
+      <AboutMe /> 
+
+      <Connect />
+      <main style={styles.main}>
+      </main>
     </div>
   );
 }
 
-export default App;
+const styles = {
+  main: {
+    padding: "40px",
+    fontFamily: "sans-serif",
+  },
+};
